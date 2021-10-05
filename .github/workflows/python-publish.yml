@@ -84,5 +84,5 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip3 install -r /opt/$PROJECT_NAME/requirement.txt
+        pip3 install -r /opt/$PROJECT_NAME/requirements.txt
         
