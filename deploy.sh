@@ -9,6 +9,8 @@ ENV_PATH=/opt/.env
 
 CURRENT_PID=$(pgrep -fl $REPOSITORY/ | grep python | awk '{print $1}')
 
+echo "install package of requirements.txt .. "
+pip3 install -r /opt/$PROJECT_NAME/requirements.txt
 echo "현재 구동 중인 애플리케이션 pid: $CURRENT_PID"
 
 if [ -z "$CURRENT_PID" ]
