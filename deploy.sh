@@ -22,6 +22,6 @@ fi
 
 echo "ENV PATH 인식 > $ENV_PATH"
 
-nohup python3 -u app.py &
+nohup python3 -u app.py  > $REPOSITORY/nohup.out 2>&1 &
 
 sudo chmod 777 $REPOSITORY/nohup.out
