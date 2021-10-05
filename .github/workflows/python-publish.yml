@@ -3,6 +3,9 @@
 
 # Actions 작업명
 name: Upload Python Package
+env:
+  PROJECT_NAME: be-recommendation_flask
+
 
 # 이벤트 바인딩 : master 브랜치에 push 이벤트 발생 시 실행
 on:
@@ -47,7 +50,7 @@ jobs:
 
     # 소스 파일 압축
     - name: zip artifacts
-      run: zip -r ./artifacts/build.zip . -i ./app/* appspec.yml
+      run: zip -r ./artifacts/$GITHUB_SHA.zip . -i ./app/* appspec.yml
     
     # AWS S3에 압축파일을 전달하는 설정 및 명령어
     - name: deploy to s3
@@ -60,4 +63,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEPLOY_DEVELOP_IAM_SECRET }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
         SOURCE_DIR: './artifacts'
-        DEST_DIR: 'be-recommendation_flask/'
+        DEST_DIR: '$PROJECT_NAME/'
