@@ -18,9 +18,8 @@ jobs:
   # 작업 분류 : 배포 (빌드와 배포를 분류 가능)
   deploy:
     # 작업 명
-    name: deploy flask app to S3 bucket
-    # 운영체제 설정 : 우분트 -> 빌드나 테스트, 압축등을 실행할 os 선택
-    runs-on: ubuntu-latest
+    name: DEPLOY_FOR_DEVELOP
+    runs-on: ubuntu-18.04
 
     # 위 작업의 세부 단계 설정
     steps:
@@ -80,5 +79,5 @@ jobs:
       run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://backendgoodsduckdevelop/$PROJECT_NAME/$GITHUB_SHA.zip
   
     - name: Code Deploy
-      run: aws deploy create-deployment --application-name $PROJECT_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name be-recommendation_flask --s3-location bucket=backendgoodsduckdevelop,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+      run: aws deploy create-deployment --application-name be-recommendation_flask --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name be-recommendation_flask --s3-location bucket=backendgoodsduckdevelop,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
         
