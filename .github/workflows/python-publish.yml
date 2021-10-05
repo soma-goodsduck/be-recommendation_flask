@@ -33,6 +33,11 @@ jobs:
       with:
         python-version: '3.x'
       
+      
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+      
     # # 파이썬 유닛테스트 스텝
     # - name: run unittest
     #   # run 명령어로 위 가상머신에서 작업 수행함
@@ -81,8 +86,3 @@ jobs:
     - name: Code Deploy
       run: aws deploy create-deployment --application-name be-recommendation_flask --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name be-recommendation_flask --s3-location bucket=backendgoodsduckdevelop,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
       
-    - name: Install dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        pip3 install -r /opt/$PROJECT_NAME/requirements.txt
-        
